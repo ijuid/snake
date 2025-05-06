@@ -3,9 +3,9 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class MenuFrame extends JFrame /*implements ActionListener */ {
+public class MenuFrame extends JFrame implements ActionListener  {
     JButton startButton;
-    MenuFrame(CardLayout cardLayout, JPanel mainPanel) {
+    MenuFrame() {
         this.setTitle("Snake");
         ImageIcon icon = new ImageIcon("snakeFont.png");
 
@@ -21,7 +21,7 @@ public class MenuFrame extends JFrame /*implements ActionListener */ {
         JPanel imagePanel = new JPanel(); //new panel object
         JLabel label = new JLabel(); //new label object
         imagePanel.setPreferredSize(new Dimension(300,200));//size of top panel
-//        imagePanel.setBackground(new Color(42,51,51));  //colour of top panel
+        imagePanel.setBackground(new Color(42,51,51));  //colour of top panel
         imagePanel.setBackground(Color.BLACK);  //colour of top panel
 
         JPanel buttonPanel = new JPanel();
@@ -35,8 +35,7 @@ public class MenuFrame extends JFrame /*implements ActionListener */ {
         startButton.setForeground(new Color(22,247,228));
         startButton.setBackground(new Color(42,51,51));
         startButton.setFocusable(false);
-//        startButton.addActionListener(this);
-        startButton.addActionListener(e -> cardLayout.show(mainPanel, "Game"));
+        startButton.addActionListener(this);
 
 
         JButton exitButton = new JButton("Exit");
@@ -65,16 +64,16 @@ public class MenuFrame extends JFrame /*implements ActionListener */ {
 
     }
 
-//    @Override
-//    public void actionPerformed(ActionEvent e) {
-//        if (e.getSource()==startButton){
-//            System.out.println("Game started");
-//            isNew(1);
-//        }
-//    }
-//
-//    public static boolean isNew(int one){
-//        System.out.println("nuts");
-//        return one == 1; //returns True when one ==1
-//    }
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource()==startButton){
+            System.out.println("Game started");
+            isNew(1);
+        }
+    }
+
+    public static boolean isNew(int one){
+        System.out.println("nuts");
+        return one == 1; //returns True when one ==1
+    }
 }
