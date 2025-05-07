@@ -1,9 +1,9 @@
 import javax.swing.*;
 import java.awt.*;
 
-public class Game extends JPanel {
+public class Game extends BaseFrame {
 
     public Game() {
-
+        super();
     }
 }

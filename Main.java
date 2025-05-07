@@ -6,7 +6,6 @@ public class Main {
 
     public static void main(String[] args) {
         MenuFrame frame= new MenuFrame(); //calls the MyFrame class
-//        Game gamePanel = new Game();
 
     }
 
