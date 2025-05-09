@@ -7,6 +7,8 @@ public class BaseFrame extends JFrame {
         this.setIconImage(newIcon.getImage());
         this.setSize(1000, 1000);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setLocationRelativeTo(null); //brings frame to middle
+        this.setResizable(false);
         this.setVisible(true);
     }
 }

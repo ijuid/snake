@@ -62,8 +62,8 @@ public class MenuFrame extends BaseFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == startButton) {
             System.out.println("Game started");
+            GameFrame Game = new GameFrame();
             this.dispose();
-            Game Game = new Game();
         }
     }
 
