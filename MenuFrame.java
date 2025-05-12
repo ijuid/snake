@@ -39,6 +39,10 @@ public class MenuFrame extends JPanel {
                 cardPanel.revalidate();
                 cardPanel.repaint();  // Ensure the panel updates
 
+                // Request focus for the Game panel
+                Component gamePanel = cardPanel.getComponent(1); // Assuming "Game" is at index 1
+                gamePanel.requestFocusInWindow();
+
             }
         });
 

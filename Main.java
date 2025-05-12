@@ -23,13 +23,16 @@ public class Main {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLocationRelativeTo(null); //brings frame to middle
         frame.setResizable(false);
+
+
         frame.add(cardPanel);
         frame.setVisible(true);
     }
 
 
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
+        System.setProperty("sun.java2d.opengl", "true"); //makes the snake not glitch when no keys pressed
+        SwingUtilities.invokeLater(() -> { //makes the code run after the constructor
             Main main = new Main();
         });
 

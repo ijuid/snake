@@ -26,11 +26,12 @@ public class Game extends JPanel implements ActionListener {
     Random random;
 
     public Game() {
-        super();
+        this.setFocusable(true); //allows it to respond to keyboard events
+        this.setDoubleBuffered(true); // Ensure double buffering is enabled
         this.setBackground(Color.BLACK);
         random = new Random();
         this.setPreferredSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT));
-        this.setFocusable(true); //allows it to respond to keyboard events
+        this.requestFocusInWindow();
         this.addKeyListener(new MyKeyAdaptor());
 
         startGame();
@@ -49,9 +50,9 @@ public class Game extends JPanel implements ActionListener {
     }
 
     public void draw(Graphics g){
-        for(int i=0; i<1000/UNIT_SIZE; i++){
-            g.drawLine(i*UNIT_SIZE, 0, i*UNIT_SIZE, 1000); //creates grid lines for x-axis
-            g.drawLine(0, i*UNIT_SIZE, 1000, i*UNIT_SIZE); //creates grid lines for y-axis
+        for(int i=0; i<SCREEN_HEIGHT/UNIT_SIZE; i++){
+            g.drawLine(i*UNIT_SIZE, 0, i*UNIT_SIZE, SCREEN_WIDTH); //creates grid lines for x-axis
+            g.drawLine(0, i*UNIT_SIZE, SCREEN_HEIGHT, i*UNIT_SIZE); //creates grid lines for y-axis
         }
 
         //creates apple
@@ -95,15 +96,45 @@ public class Game extends JPanel implements ActionListener {
                 break;
         }
     }
+
     public void checkApple(){
 
     }
+
     public void checkCollisions(){
+        //checks if head collides with body
+        for(int i=bodyParts; i>0; i--){
+            if(x[0]==x[i] && y[0]==y[i]){
+                running = false;
+            }
+        }
+        //checks if head touches left border
+        if(x[0] < 1){
+            running = false;
+        }
+        //check if head touches right border
+        if(x[0] > SCREEN_WIDTH-UNIT_SIZE){
+            running = false;
+        }
+        //check if touches top border
+        if(y[0] < 0){
+            running = false;
+        }
+        //check if touches bottom border
+        if(y[0] > SCREEN_HEIGHT-100){
+            running = false;
+        }
+
+        if(!running){
+            timer.stop();
+        }
 
     }
+
     public void gameOver(Graphics g){
 
     }
+
     @Override
     public void actionPerformed(ActionEvent e){
         if(running){
@@ -116,7 +147,39 @@ public class Game extends JPanel implements ActionListener {
     public class MyKeyAdaptor extends KeyAdapter {
         @Override
         public void keyPressed(KeyEvent e){
+            switch(e.getKeyCode()){
+                case KeyEvent.VK_LEFT:
+                case KeyEvent.VK_A:
+                    if(direction != 'R'){
+                        direction = 'L';
+                    }
+                    break;
+                case KeyEvent.VK_RIGHT:
+                case KeyEvent.VK_D:
+                    if(direction != 'L'){
+                        direction = 'R';
+                    }
+                    break;
+                case KeyEvent.VK_UP:
+                case KeyEvent.VK_W:
+                    if(direction != 'D'){
+                        direction = 'U';
+                    }
+                    break;
+                case KeyEvent.VK_DOWN:
+                case KeyEvent.VK_S:
+                    if(direction != 'U'){
+                        direction = 'D';
+                    }
+                    break;
+            }
 
         }
     }
+//    @Override
+//    public void addNotify() {
+//        super.addNotify();
+//        requestFocusInWindow(); // Ensure the panel requests keyboard focus
+//    }
+
 }
