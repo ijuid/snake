@@ -44,22 +44,56 @@ public class Game extends JPanel implements ActionListener {
     }
 
     public void paintComponent(Graphics g){
-        super.paintComponents(g);
+        super.paintComponent(g);
         draw(g);
     }
 
     public void draw(Graphics g){
         for(int i=0; i<1000/UNIT_SIZE; i++){
-            g.drawLine(i*UNIT_SIZE, 0, i*UNIT_SIZE, 1000);
-            g.drawLine(0, i*UNIT_SIZE, 1000, i*UNIT_SIZE);
+            g.drawLine(i*UNIT_SIZE, 0, i*UNIT_SIZE, 1000); //creates grid lines for x-axis
+            g.drawLine(0, i*UNIT_SIZE, 1000, i*UNIT_SIZE); //creates grid lines for y-axis
+        }
+
+        //creates apple
+        g.setColor(Color.CYAN);
+        g.fillOval(appleX, appleY, UNIT_SIZE, UNIT_SIZE);
+
+        //creates snake
+        for(int i=0; i<bodyParts; i++){
+            if(i==0){
+                g.setColor(Color.GREEN);
+                g.fillRect(x[i], y[i], UNIT_SIZE, UNIT_SIZE);
+            }
+            else{
+                g.setColor(Color.CYAN);
+                g.fillRect(x[i], y[i], UNIT_SIZE, UNIT_SIZE);
+            }
         }
     }
 
     public void newApple(){
-
+        appleX = random.nextInt((int) SCREEN_WIDTH/UNIT_SIZE)*UNIT_SIZE;
+        appleY = random.nextInt((int) SCREEN_HEIGHT/UNIT_SIZE)*UNIT_SIZE;
     }
     public void move(){
-
+        for(int i=bodyParts; i>0; i--){
+            x[i] = x[i-1];
+            y[i] = y[i-1];
+        }
+        switch(direction){
+            case 'U':   //if direction moves up the y coordinate of head of snake is subtracted by unit size
+                y[0] = y[0] - UNIT_SIZE;
+                break;
+            case 'D':
+                y[0] = y[0] + UNIT_SIZE;
+                break;
+            case 'L':
+                x[0] = x[0] - UNIT_SIZE;
+                break;
+            case 'R':
+                x[0] = x[0] + UNIT_SIZE;
+                break;
+        }
     }
     public void checkApple(){
 
@@ -72,7 +106,12 @@ public class Game extends JPanel implements ActionListener {
     }
     @Override
     public void actionPerformed(ActionEvent e){
-
+        if(running){
+            move();
+            checkApple();
+            checkCollisions();
+        }
+        repaint();
     }
     public class MyKeyAdaptor extends KeyAdapter {
         @Override

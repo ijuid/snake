@@ -3,12 +3,11 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class MenuFrame extends BaseFrame implements ActionListener {
+public class MenuFrame extends JPanel {
     JButton startButton;
 
-    MenuFrame() {
-        super();
-        this.setBackground(new Color(42, 51, 51));
+    MenuFrame(CardLayout cardLayout, JPanel cardPanel) {
+//        this.setBackground(new Color(42, 51, 51));
 
         JPanel centerPanel = new JPanel();
         centerPanel.setBackground(Color.BLACK);//colour for center
@@ -32,7 +31,16 @@ public class MenuFrame extends BaseFrame implements ActionListener {
         startButton.setForeground(new Color(22, 247, 228));
         startButton.setBackground(new Color(42, 51, 51));
         startButton.setFocusable(false);
-        startButton.addActionListener(this);
+
+        startButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cardLayout.show(cardPanel, "Game");
+                cardPanel.revalidate();
+                cardPanel.repaint();  // Ensure the panel updates
+
+            }
+        });
 
         JButton exitButton = new JButton("Exit");
         exitButton.addActionListener(e -> System.exit(0)); // Exit game
@@ -47,7 +55,6 @@ public class MenuFrame extends BaseFrame implements ActionListener {
         buttonPanel.add(exitButton);  //makes buttons flow layout
 
         this.setLayout(new BorderLayout()); //sets the general layout to be border
-        this.getContentPane().setBackground(Color.BLACK);
 
         startButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         exitButton.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -58,13 +65,5 @@ public class MenuFrame extends BaseFrame implements ActionListener {
 
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == startButton) {
-            System.out.println("Game started");
-            GameFrame Game = new GameFrame();
-            this.dispose();
-        }
-    }
 
 }
