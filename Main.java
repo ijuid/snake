@@ -11,7 +11,7 @@ public class Main {
         JPanel cardPanel = new JPanel(cardLayout);
 
         MenuFrame menuFrame = new MenuFrame(cardLayout, cardPanel);
-        Game game = new Game();
+        Game game = new Game(cardLayout, cardPanel);
         GameOver gameOver = new GameOver(cardLayout, cardPanel);
 
         cardPanel.add(menuFrame, "Menu");

@@ -17,7 +17,7 @@ public class Game extends JPanel implements ActionListener {
     private final int[] x = new int[GAME_UNITS]; //x coordinates of bodyParts
     private final int[] y = new int[GAME_UNITS]; //y coordinates of bodyParts
     private int bodyParts= 6;
-    int applesEaten;
+    private int applesEaten;
     private int appleX;
     private int appleY;
     private char direction = 'R'; //snake begins going right
@@ -25,7 +25,10 @@ public class Game extends JPanel implements ActionListener {
     private Timer timer;
     private Random random;
 
-    public Game() {
+    CardLayout cardLayout;
+    JPanel cardPanel;
+
+    public Game(CardLayout cardLayout, JPanel cardPanel) {
         this.setFocusable(true); //allows it to respond to keyboard events
         this.setDoubleBuffered(true); // Ensure double buffering is enabled
         this.setBackground(Color.BLACK);
@@ -33,8 +36,11 @@ public class Game extends JPanel implements ActionListener {
         this.setPreferredSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT));
         this.requestFocusInWindow();
         this.addKeyListener(new MyKeyAdaptor());
+        this.cardLayout = cardLayout;
+        this.cardPanel = cardPanel;
 
         startGame();
+
     }
 
     public void startGame(){
@@ -77,12 +83,17 @@ public class Game extends JPanel implements ActionListener {
             g.drawString("Score: " + applesEaten, (SCREEN_WIDTH - metrics.stringWidth("Score"+applesEaten)) / 2, g.getFont().getSize());
 
         }
-        else{
-            gameOver(g);
-//            CardLayout cardLayout = new CardLayout();
-//            JPanel cardPanel = new JPanel();
+//        else{
+////            gameOver(g);
 //            cardLayout.show(cardPanel, "GameOver");
-        }
+//            cardPanel.revalidate();    // Update visual layout
+//            cardPanel.repaint();       // Ensure the screen updates
+//
+//            // Request focus for the GameOver panel
+//            Component gameOverPanel = cardPanel.getComponent(2); // Assuming GameOver at index 2
+//            gameOverPanel.requestFocusInWindow();
+//
+//        }
     }
 
     public void newApple(){
@@ -144,25 +155,32 @@ public class Game extends JPanel implements ActionListener {
 
         if(!running){
             timer.stop();
+            cardLayout.show(cardPanel, "GameOver");
+            cardPanel.revalidate();    // Update visual layout
+            cardPanel.repaint();       // Ensure the screen updates
+
+            // Request focus for the GameOver panel
+            Component gameOverPanel = cardPanel.getComponent(2); // Assuming GameOver at index 2
+            gameOverPanel.requestFocusInWindow();
         }
 
     }
 
-    public void gameOver(Graphics g){
-        //text for game over
-        g.setColor(Color.RED);
-        g.setFont(new Font("Helvetica", Font.BOLD, 80));
-        FontMetrics metrics = g.getFontMetrics();
-        g.drawString("Game Over", (SCREEN_WIDTH - metrics.stringWidth("Game Over")) / 2, SCREEN_HEIGHT / 2);
-        g.setColor(Color.WHITE);
-        g.drawString("Score: " + applesEaten, 200, 600);
-        JPanel panel = new JPanel();
-        JButton button = new JButton("Restart");
-        button.addActionListener(e -> startGame());
-        button.addActionListener(e -> repaint());
-        panel.add(button);
-        this.add(panel);
-    }
+//    public void gameOver(Graphics g){
+//        //text for game over
+//        g.setColor(Color.RED);
+//        g.setFont(new Font("Helvetica", Font.BOLD, 80));
+//        FontMetrics metrics = g.getFontMetrics();
+//        g.drawString("Game Over", (SCREEN_WIDTH - metrics.stringWidth("Game Over")) / 2, SCREEN_HEIGHT / 2);
+//        g.setColor(Color.WHITE);
+//        g.drawString("Score: " + applesEaten, 200, 600);
+//        JPanel panel = new JPanel();
+//        JButton button = new JButton("Restart");
+//        button.addActionListener(e -> startGame());
+//        button.addActionListener(e -> repaint());
+//        panel.add(button);
+//        this.add(panel);
+//    }
 
     @Override
     public void actionPerformed(ActionEvent e){
@@ -205,10 +223,8 @@ public class Game extends JPanel implements ActionListener {
 
         }
     }
-//    @Override
-//    public void addNotify() {
-//        super.addNotify();
-//        requestFocusInWindow(); // Ensure the panel requests keyboard focus
-//    }
 
+    public int getApplesEaten() {
+        return applesEaten;
+    }
 }
