@@ -28,6 +28,7 @@ public class MenuFrame extends JPanel {
         startButton = new JButton("Start");
         startButton.setPreferredSize(new Dimension(300, 100)); //changes size of buttons
         startButton.setFont(new Font("Helvetica", Font.BOLD, 40));
+        startButton.setHorizontalTextPosition(SwingConstants.LEFT);
         startButton.setForeground(new Color(22, 247, 228));
         startButton.setBackground(new Color(42, 51, 51));
         startButton.setFocusable(false);
