@@ -8,14 +8,12 @@ public class MenuFrame extends JPanel {
 
     MenuFrame(CardLayout cardLayout, JPanel cardPanel) {
 //        this.setBackground(new Color(42, 51, 51));
-
         JPanel centerPanel = new JPanel();
         centerPanel.setBackground(Color.BLACK);//colour for center
         ImageIcon newIcon = new ImageIcon("images/snakeFont.png");
         centerPanel.add(new JLabel(newIcon));
 
         JPanel imagePanel = new JPanel(); //new panel object
-        JLabel label = new JLabel(); //new label object
         imagePanel.setPreferredSize(new Dimension(300, 200));//size of top panel
         imagePanel.setBackground(new Color(42, 51, 51));  //colour of top panel
         imagePanel.setBackground(Color.BLACK);  //colour of top panel
@@ -71,6 +69,7 @@ public class MenuFrame extends JPanel {
         this.add(centerPanel, BorderLayout.CENTER);
 
     }
+
 
 
 }

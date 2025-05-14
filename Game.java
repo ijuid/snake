@@ -23,6 +23,7 @@ public class Game extends JPanel implements ActionListener {
     private boolean running = false;
     private Timer timer;
     private Random random;
+    private int num = 2;
 
     CardLayout cardLayout = new CardLayout();
     JPanel cardPanel = new JPanel();
@@ -77,9 +78,9 @@ public class Game extends JPanel implements ActionListener {
                 }
             }
             g.setColor(Color.MAGENTA);
-            g.setFont(new Font("Helvetica", Font.ITALIC, 80));
+            g.setFont(new Font("Helvetica", Font.ITALIC | Font.BOLD, 65));
             FontMetrics metrics = g.getFontMetrics();
-            g.drawString("Score: " + applesEaten, (SCREEN_WIDTH - metrics.stringWidth("Score"+applesEaten)) / 2, g.getFont().getSize());
+            g.drawString("Score: " + applesEaten, (SCREEN_WIDTH - metrics.stringWidth("Score"+applesEaten)) / 2 -25, g.getFont().getSize() +17);
 
         }
 //        else{
@@ -154,7 +155,7 @@ public class Game extends JPanel implements ActionListener {
 
         if(!running){
             timer.stop();
-            GameOver gameOver = new GameOver(cardLayout, cardPanel);
+            GameOver gameOver = new GameOver(cardLayout, cardPanel, this);
             cardPanel.add(gameOver, "GameOver");
 
             cardLayout.show(cardPanel, "GameOver");
@@ -229,4 +230,8 @@ public class Game extends JPanel implements ActionListener {
     public int getApplesEaten() {
         return applesEaten;
     }
+//
+//    public int getNum(){
+//        return num+1;
+//    }
 }

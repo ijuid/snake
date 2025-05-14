@@ -3,8 +3,6 @@ import java.awt.*;
 
 
 public class Main {
-    JFrame frame = new JFrame("CardLayout demo");
-
     public Main() {
         JFrame frame = new JFrame("CardLayout demo");
         CardLayout cardLayout = new CardLayout();
