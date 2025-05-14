@@ -1,11 +1,10 @@
-import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.Random;
-import javax.swing.Timer;
+import javax.swing.*;
 
 public class Game extends JPanel implements ActionListener {
 
@@ -25,8 +24,8 @@ public class Game extends JPanel implements ActionListener {
     private Timer timer;
     private Random random;
 
-    CardLayout cardLayout;
-    JPanel cardPanel;
+    CardLayout cardLayout = new CardLayout();
+    JPanel cardPanel = new JPanel();
 
     public Game(CardLayout cardLayout, JPanel cardPanel) {
         this.setFocusable(true); //allows it to respond to keyboard events
@@ -155,6 +154,9 @@ public class Game extends JPanel implements ActionListener {
 
         if(!running){
             timer.stop();
+            GameOver gameOver = new GameOver(cardLayout, cardPanel);
+            cardPanel.add(gameOver, "GameOver");
+
             cardLayout.show(cardPanel, "GameOver");
             cardPanel.revalidate();    // Update visual layout
             cardPanel.repaint();       // Ensure the screen updates

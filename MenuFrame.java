@@ -36,6 +36,8 @@ public class MenuFrame extends JPanel {
         startButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                Game game = new Game(cardLayout, cardPanel);
+                cardPanel.add(game, "Game");
                 cardLayout.show(cardPanel, "Game");
                 cardPanel.revalidate();
                 cardPanel.repaint();  // Ensure the panel updates

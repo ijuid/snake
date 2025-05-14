@@ -11,12 +11,10 @@ public class Main {
         JPanel cardPanel = new JPanel(cardLayout);
 
         MenuFrame menuFrame = new MenuFrame(cardLayout, cardPanel);
-        Game game = new Game(cardLayout, cardPanel);
-        GameOver gameOver = new GameOver(cardLayout, cardPanel);
+//        GameOver gameOver = new GameOver(cardLayout, cardPanel);
 
         cardPanel.add(menuFrame, "Menu");
-        cardPanel.add(game, "Game");
-        cardPanel.add(gameOver, "GameOver");
+//        cardPanel.add(gameOver, "GameOver");
 
         frame.setTitle("Snake");
         ImageIcon newIcon = new ImageIcon("images/apple.png");

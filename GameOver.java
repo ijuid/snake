@@ -10,7 +10,8 @@ public class GameOver extends JPanel {
     public GameOver(CardLayout cardLayout, JPanel cardPanel) {
         JPanel centerPanel = new JPanel();
         centerPanel.setBackground(Color.BLACK);//colour for center
-        ImageIcon newIcon = new ImageIcon("images/snakeFont.png");
+        ImageIcon newIcon = new ImageIcon("images/GameOver.png");
+        newIcon.setImage(newIcon.getImage().getScaledInstance(800, 125, Image.SCALE_DEFAULT));
         centerPanel.add(new JLabel(newIcon));
 
         JPanel imagePanel = new JPanel(); //new panel object
