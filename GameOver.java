@@ -5,11 +5,10 @@ import java.awt.event.ActionListener;
 
 public class GameOver extends JPanel {
     JButton restartButton;
-    private int applesEaten;
 
     public GameOver(CardLayout cardLayout, JPanel cardPanel, Game game) {
         this.setLayout(new BorderLayout()); //sets the general layout to be border
-        applesEaten = game.getApplesEaten();
+        int applesEaten = game.getApplesEaten();
         JPanel centerPanel = new JPanel();
         centerPanel.setBackground(Color.BLACK);//colour for center
         ImageIcon newIcon = new ImageIcon("images/GameOver.png");
@@ -24,7 +23,7 @@ public class GameOver extends JPanel {
         JLabel Score = new JLabel();
         Score.setText("Score: " + applesEaten);
         Score.setFont(new Font("Helvetica", Font.ITALIC | Font.BOLD, 65));
-        Score.setForeground(Color.MAGENTA);
+        Score.setForeground(Color.ORANGE);
         Score.setHorizontalAlignment(SwingConstants.CENTER);
         Score.setVerticalAlignment(SwingConstants.CENTER);
         Score.setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));
@@ -43,6 +42,7 @@ public class GameOver extends JPanel {
         restartButton.setFont(new Font("Helvetica", Font.BOLD, 40));
         restartButton.setHorizontalTextPosition(SwingConstants.LEFT);
         restartButton.setForeground(new Color(22, 247, 228));
+//        restartButton.setForeground(Color.GREEN);
         restartButton.setBackground(new Color(42, 51, 51));
         restartButton.setFocusable(false);
 
@@ -68,7 +68,9 @@ public class GameOver extends JPanel {
         exitButton.setFont(new Font("Helvetica", Font.BOLD, 40));
 //        exitButton.setForeground(new Color(170, 83, 232));
         exitButton.setBackground(new Color(42, 51, 51));
-        exitButton.setForeground(Color.RED);
+//        exitButton.setForeground(Color.RED);
+        exitButton.setForeground(new Color(170, 83, 232));
+
         exitButton.setFocusable(false);
 
 
